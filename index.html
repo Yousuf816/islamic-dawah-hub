@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light of Guidance - Your Islamic Dawah Hub</title>
+    <meta name="description" content="Discover the beauty of Islam through Quran, Hadith, and authentic Islamic resources. Your central hub for spiritual guidance and Dawah.">
+    <meta name="keywords" content="Islam, Quran, Hadith, Islamic resources, Dawah, Islamic guidance, Muslim community">
+    <meta name="author" content="Yousuf">
+    <meta name="theme-color" content="#10b981">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Light of Guidance - Islamic Dawah Hub">
+    <meta property="og:description" content="Your central hub for Islamic knowledge, guidance, and Dawah resources">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E??%3C/text%3E%3C/svg%3E">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body class="font-inter bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="text-2xl">??</div>
+                    <h1 class="text-xl font-bold font-amiri">Light of Guidance</h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#quran" class="nav-link">Quran</a>
+                    <a href="#hadith" class="nav-link">Hadith</a>
+                    <a href="#tools" class="nav-link">Tools</a>
+                    <a href="#resources" class="nav-link">Resources</a>
+                    <a href="#about" class="nav-link">About</a>
+                </div>
+                
+                <!-- Theme Toggle & Mobile Menu -->
+                <div class="flex items-center space-x-4">
+                    <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-sun dark:hidden"></i>
+                        <i class="fas fa-moon hidden dark:inline"></i>
+                    </button>
+                    
+                    <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#home" class="block py-2 nav-link">Home</a>
+                <a href="#quran" class="block py-2 nav-link">Quran</a>
+                <a href="#hadith" class="block py-2 nav-link">Hadith</a>
+                <a href="#tools" class="block py-2 nav-link">Tools</a>
+                <a href="#resources" class="block py-2 nav-link">Resources</a>
+                <a href="#about" class="block py-2 nav-link">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5 dark:opacity-10">
+            <div class="islamic-pattern"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="mb-8">
+                <div class="text-6xl mb-4">??</div>
+                <h1 class="text-5xl md:text-7xl font-bold font-amiri mb-6 bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+                    Light of Guidance
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8">
+                    Your Central Hub for Islamic Knowledge and Dawah
+                </p>
+            </div>
+            
+            <!-- Featured Quran Verse -->
+            <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 mb-8 shadow-xl">
+                <div class="text-3xl md:text-4xl font-amiri text-right mb-4 text-emerald-700 dark:text-emerald-400">
+                    ????? ?????? ??????? ?????? ???????????
+                </div>
+                <p class="text-lg text-gray-700 dark:text-gray-300 mb-2">
+                    "And whoever Allah guides - he is the [rightly] guided one."
+                </p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">
+                    - Quran 7:178
+                </p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#quran" class="btn-primary">
+                    <i class="fas fa-book-quran mr-2"></i>
+                    Explore Quran
+                </a>
+                <a href="#hadith" class="btn-secondary">
+                    <i class="fas fa-quote-left mr-2"></i>
+                    Read Hadith
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-2xl text-gray-400"></i>
+        </div>
+    </section>
+
+    <!-- Quran Section -->
+    <section id="quran" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold font-amiri mb-4">The Holy Quran</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">Divine guidance for all humanity</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Featured Verses -->
+                <div class="space-y-6">
+                    <h3 class="text-2xl font-bold font-amiri mb-6">Featured Verses</h3>
+                    
+                    <div class="verse-card">
+                        <div class="text-2xl font-amiri text-right mb-4 text-emerald-700 dark:text-emerald-400">
+                            ?????? ??????? ???????????? ??????????
+                        </div>
+                        <p class="text-lg mb-2">"In the name of Allah, the Entirely Merciful, the Especially Merciful."</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">- Quran 1:1</p>
+                    </div>
+                    
+                    <div class="verse-card">
+                        <div class="text-2xl font-amiri text-right mb-4 text-emerald-700 dark:text-emerald-400">
+                            ?????? ???????? ?????? ??? ???????
+                        </div>
+                        <p class="text-lg mb-2">"And He is with you wherever you are."</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">- Quran 57:4</p>
+                    </div>
+                    
+                    <div class="verse-card">
+                        <div class="text-2xl font-amiri text-right mb-4 text-emerald-700 dark:text-emerald-400">
+                            ????????????? ????????????
+                        </div>
+                        <p class="text-lg mb-2">"So remember Me; I will remember you."</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">- Quran 2:152</p>
+                    </div>
+                </div>
+                
+                <!-- Tafsir Section -->
+                <div>
+                    <h3 class="text-2xl font-bold font-amiri mb-6">Tafsir (Commentary)</h3>
+                    <div class="bg-white dark:bg-gray-700 rounded-xl p-6 shadow-lg">
+                        <h4 class="text-xl font-semibold mb-4">Understanding the Quran</h4>
+                        <p class="text-gray-600 dark:text-gray-300 mb-4">
+                            The Quran is not just a book to be read, but a guide to be followed. Each verse contains 
+                            profound wisdom and guidance for our daily lives.
+                        </p>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Through proper understanding (tafsir), we can apply the teachings of the Quran in our 
+                            modern context while maintaining the purity of the message.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hadith Section -->
+    <section id="hadith" class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold font-amiri mb-4">Authentic Hadith</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">Sayings and actions of Prophet Muhammad (PBUH)</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="hadith-card">
+                    <div class="text-6xl mb-4 text-center">??</div>
+                    <blockquote class="text-lg italic mb-4">
+                        "The best of people are those who are most beneficial to others."
+                    </blockquote>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        - Prophet Muhammad (PBUH)<br>
+                        <span class="font-semibold">Source:</span> Al-Tabarani
+                    </p>
+                </div>
+                
+                <div class="hadith-card">
+                    <div class="text-6xl mb-4 text-center">??</div>
+                    <blockquote class="text-lg italic mb-4">
+                        "Whoever believes in Allah and the Last Day should speak good or remain silent."
+                    </blockquote>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        - Prophet Muhammad (PBUH)<br>
+                        <span class="font-semibold">Source:</span> Sahih Bukhari
+                    </p>
+                </div>
+                
+                <div class="hadith-card">
+                    <div class="text-6xl mb-4 text-center">??</div>
+                    <blockquote class="text-lg italic mb-4">
+                        "The believer is not one who eats his fill while his neighbor goes hungry."
+                    </blockquote>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        - Prophet Muhammad (PBUH)<br>
+                        <span class="font-semibold">Source:</span> Al-Bayhaqi
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold font-amiri mb-4">Islamic Tools</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">Enhance your spiritual journey</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Enhanced Tasbeeh Counter -->
+                <div class="tool-card">
+                    <div class="text-4xl mb-4 text-center">??</div>
+                    <h3 class="text-xl font-bold mb-4">Tasbeeh Counter</h3>
+                    <div class="text-center mb-4">
+                        <div id="tasbeeh-count" class="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">0</div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Subhan Allah</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button id="tasbeeh-increment" class="flex-1 btn-primary py-2">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                        <button id="tasbeeh-reset" class="flex-1 btn-secondary py-2">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Enhanced Prayer Times -->
+                <div class="tool-card">
+                    <div class="text-4xl mb-4 text-center">??</div>
+                    <h3 class="text-xl font-bold mb-4">Prayer Times</h3>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span>Fajr:</span>
+                            <span class="font-semibold">5:30 AM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Dhuhr:</span>
+                            <span class="font-semibold">12:15 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Asr:</span>
+                            <span class="font-semibold">3:45 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Maghrib:</span>
+                            <span class="font-semibold">6:20 PM</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Isha:</span>
+                            <span class="font-semibold">7:45 PM</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
+                        * Times may vary by location
+                    </p>
+                </div>
+                
+                <!-- Enhanced Daily Dua -->
+                <div class="tool-card">
+                    <div class="text-4xl mb-4 text-center">??</div>
+                    <h3 class="text-xl font-bold mb-4">Daily Dua</h3>
+                    <div id="daily-dua" class="mb-4">
+                        <p class="text-sm italic mb-2">
+                            "O Allah, grant us good in this world and good in the Hereafter, and save us from the punishment of the Fire."
+                        </p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                            - Quran 2:201
+                        </p>
+                    </div>
+                    <button id="new-dua" class="w-full btn-primary py-2">
+                        <i class="fas fa-refresh mr-2"></i>
+                        New Dua
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold font-amiri mb-4">Free Resources</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">Download and share Islamic content</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="resource-card">
+                    <div class="text-4xl mb-4 text-center">???</div>
+                    <h3 class="text-xl font-bold mb-4">Islamic Wallpapers</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Beautiful high-resolution wallpapers with Quranic verses and Islamic calligraphy.
+                    </p>
+                    <button class="btn-primary w-full">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Collection
+                    </button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="text-4xl mb-4 text-center">??</div>
+                    <h3 class="text-xl font-bold mb-4">Islamic Guides</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Comprehensive PDF guides on prayer, fasting, and Islamic fundamentals.
+                    </p>
+                    <button class="btn-primary w-full">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Guides
+                    </button>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="text-4xl mb-4 text-center">??</div>
+                    <h3 class="text-xl font-bold mb-4">Nasheed Collection</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Beautiful Islamic songs and recitations for spiritual upliftment.
+                    </p>
+                    <button class="btn-primary w-full">
+                        <i class="fas fa-download mr-2"></i>
+                        Download Audio
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold font-amiri mb-8">About Light of Guidance</h2>
+            
+            <div class="bg-white dark:bg-gray-700 rounded-2xl p-8 mb-8 shadow-xl">
+                <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                    Light of Guidance is a comprehensive Islamic platform dedicated to spreading the beautiful 
+                    teachings of Islam through authentic sources. Our mission is to provide easy access to 
+                    Quranic verses, authentic Hadith, and valuable Islamic resources for Muslims and 
+                    non-Muslims alike.
+                </p>
+                
+                <p class="text-lg text-gray-600 dark:text-gray-300">
+                    Every share, every download, and every moment spent learning here is a form of Dawah - 
+                    spreading the light of guidance to all corners of the world. May Allah accept our efforts 
+                    and make this platform a source of benefit for all.
+                </p>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="social-link" aria-label="YouTube">
+                    <i class="fab fa-youtube text-2xl"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="TikTok">
+                    <i class="fab fa-tiktok text-2xl"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="Instagram">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
+                <a href="#" class="social-link" aria-label="Twitter">
+                    <i class="fab fa-twitter text-2xl"></i>
+                </a>
+            </div>
+            
+            <p class="text-gray-500 dark:text-gray-400">
+                Follow us for daily Islamic content, reminders, and spiritual guidance.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="text-2xl">??</div>
+                        <h3 class="text-xl font-bold font-amiri">Light of Guidance</h3>
+                    </div>
+                    <p class="text-gray-400">
+                        Your central hub for Islamic knowledge, guidance, and Dawah resources.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="#quran" class="block text-gray-400 hover:text-white transition-colors">Quran</a>
+                        <a href="#hadith" class="block text-gray-400 hover:text-white transition-colors">Hadith</a>
+                        <a href="#tools" class="block text-gray-400 hover:text-white transition-colors">Tools</a>
+                        <a href="#resources" class="block text-gray-400 hover:text-white transition-colors">Resources</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-tiktok text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8 text-center">
+                <p class="text-gray-400 mb-2">
+                    © 2025 Light of Guidance. All rights reserved.
+                </p>
+                <p class="text-sm text-gray-500 mb-2">
+                    Created with ?? by <span class="text-emerald-400 font-semibold" data-creator="Yousuf">Yousuf</span> for the sake of Allah
+                </p>
+                <p class="text-sm text-gray-500">
+                    Every share is a form of Dawah ??
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+# Light of Guidance - Configuration File
+# Replace Yousuf with your actual name
+
+# Website Configuration
+WEBSITE_NAME="Light of Guidance"
+CREATOR_NAME="Yousuf"
+CURRENT_YEAR="2025"
+
+# Social Media Links (replace # with your actual URLs)
+YOUTUBE_URL="#"
+TIKTOK_URL="#"
+INSTAGRAM_URL="#"
+TWITTER_URL="#"
+
+# Features to Enable/Disable
+ENABLE_AUDIO=true
+ENABLE_ANIMATIONS=true
+ENABLE_NOTIFICATIONS=true
+ENABLE_PWA=true
+
+# Color Scheme
+PRIMARY_COLOR="#10b981"
+SECONDARY_COLOR="#3b82f6"
+ACCENT_COLOR="#f59e0b"
+
+# Instructions:
+# 1. Replace Yousuf with your actual name in all files
+# 2. Update social media URLs in index.html
+# 3. Customize colors if desired
+# 4. Upload all files to your hosting provider
+# 5. Your Islamic Dawah website is ready!
