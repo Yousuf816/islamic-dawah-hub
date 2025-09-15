@@ -13,6 +13,23 @@ document.addEventListener("DOMContentLoaded", function() {
     initializeWebsite();
 });
 
+// Remove loader on full load and set theme-color
+window.addEventListener("load", () => {
+    const loader = document.getElementById("app-loader");
+    if (loader) {
+        loader.style.opacity = "0";
+        setTimeout(() => loader.remove(), 300);
+    }
+    updateThemeColorMeta();
+});
+
+function updateThemeColorMeta() {
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (!meta) return;
+    const isDark = document.documentElement.classList.contains("dark");
+    meta.setAttribute("content", isDark ? "#111827" : "#ffffff");
+}
+
 // Initialize all website functionality
 function initializeWebsite() {
     updateCreatorCredits();
@@ -54,29 +71,26 @@ function setupThemeToggle() {
     const themeToggle = document.getElementById("theme-toggle");
     const html = document.documentElement;
     
-    // Check for saved theme preference or system preference
+    // Check for saved theme preference or default to light mode
     const savedTheme = localStorage.getItem("theme");
     const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const currentTheme = savedTheme || (systemPrefersDark ? "dark" : "light");
-    
     html.classList.toggle("dark", currentTheme === "dark");
-    
+    updateThemeColorMeta();
+
     themeToggle.addEventListener("click", function() {
         html.classList.toggle("dark");
         const newTheme = html.classList.contains("dark") ? "dark" : "light";
         localStorage.setItem("theme", newTheme);
-        
-        // Add visual feedback with enhanced animation
-        showNotification(`Switched to ${newTheme} mode`, "success");
-        
-        // Add ripple effect
-        createRippleEffect(this);
+        updateThemeColorMeta();
+        showNotification(`Switched to ${newTheme} mode`);
     });
-    
-    // Listen for system theme changes
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+
+    // Sync with system preference when no manual choice stored
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", e => {
         if (!localStorage.getItem("theme")) {
             html.classList.toggle("dark", e.matches);
+            updateThemeColorMeta();
         }
     });
 }

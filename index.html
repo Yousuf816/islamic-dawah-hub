@@ -31,18 +31,24 @@
     <link rel="stylesheet" href="styles.css">
     
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E??%3C/text%3E%3C/svg%3E">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌙%3C/text%3E%3C/svg%3E">
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
 </head>
 <body class="font-inter bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <div id="app-loader" class="fixed inset-0 z-[60] grid place-items-center bg-white dark:bg-gray-900 transition-opacity duration-300">
+        <div class="flex flex-col items-center gap-3">
+            <div class="w-12 h-12 rounded-full border-4 border-emerald-500 border-t-transparent animate-spin" aria-label="Loading"></div>
+            <p class="text-sm text-gray-500 dark:text-gray-400">Loading Light of Guidance…</p>
+        </div>
+    </div>
     <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50 border-b border-gray-200 dark:border-gray-700">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-2">
-                    <div class="text-2xl">??</div>
+                    <div class="text-2xl">🌙</div>
                     <h1 class="text-xl font-bold font-amiri">Light of Guidance</h1>
                 </div>
                 
@@ -84,7 +90,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden content-auto">
         <!-- Background Pattern -->
         <div class="absolute inset-0 opacity-5 dark:opacity-10">
             <div class="islamic-pattern"></div>
@@ -92,7 +98,7 @@
         
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div class="mb-8">
-                <div class="text-6xl mb-4">??</div>
+                <div class="text-6xl mb-4">🌙</div>
                 <h1 class="text-5xl md:text-7xl font-bold font-amiri mb-6 bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
                     Light of Guidance
                 </h1>
@@ -104,7 +110,7 @@
             <!-- Featured Quran Verse -->
             <div class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 mb-8 shadow-xl">
                 <div class="text-3xl md:text-4xl font-amiri text-right mb-4 text-emerald-700 dark:text-emerald-400">
-                    ????? ?????? ??????? ?????? ???????????
+                    وَمَن يَهْدِ اللَّهُ فَهُوَ الْمُهْتَدِ
                 </div>
                 <p class="text-lg text-gray-700 dark:text-gray-300 mb-2">
                     "And whoever Allah guides - he is the [rightly] guided one."
@@ -133,7 +139,7 @@
     </section>
 
     <!-- Quran Section -->
-    <section id="quran" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <section id="quran" class="py-20 bg-gray-50 dark:bg-gray-800 content-auto">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold font-amiri mb-4">The Holy Quran</h2>
@@ -147,7 +153,7 @@
                     
                     <div class="verse-card">
                         <div class="text-2xl font-amiri text-right mb-4 text-emerald-700 dark:text-emerald-400">
-                            ?????? ??????? ???????????? ??????????
+                            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
                         </div>
                         <p class="text-lg mb-2">"In the name of Allah, the Entirely Merciful, the Especially Merciful."</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">- Quran 1:1</p>
@@ -155,7 +161,7 @@
                     
                     <div class="verse-card">
                         <div class="text-2xl font-amiri text-right mb-4 text-emerald-700 dark:text-emerald-400">
-                            ?????? ???????? ?????? ??? ???????
+                            وَهُوَ مَعَكُمْ أَيْنَ مَا كُنتُمْ
                         </div>
                         <p class="text-lg mb-2">"And He is with you wherever you are."</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">- Quran 57:4</p>
@@ -163,7 +169,7 @@
                     
                     <div class="verse-card">
                         <div class="text-2xl font-amiri text-right mb-4 text-emerald-700 dark:text-emerald-400">
-                            ????????????? ????????????
+                            فَاذْكُرُونِي أَذْكُرْكُمْ
                         </div>
                         <p class="text-lg mb-2">"So remember Me; I will remember you."</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">- Quran 2:152</p>
@@ -190,7 +196,7 @@
     </section>
 
     <!-- Hadith Section -->
-    <section id="hadith" class="py-20">
+    <section id="hadith" class="py-20 content-auto">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold font-amiri mb-4">Authentic Hadith</h2>
@@ -199,7 +205,7 @@
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="hadith-card">
-                    <div class="text-6xl mb-4 text-center">??</div>
+                    <div class="text-6xl mb-4 text-center">💚</div>
                     <blockquote class="text-lg italic mb-4">
                         "The best of people are those who are most beneficial to others."
                     </blockquote>
@@ -210,7 +216,7 @@
                 </div>
                 
                 <div class="hadith-card">
-                    <div class="text-6xl mb-4 text-center">??</div>
+                    <div class="text-6xl mb-4 text-center">🤲</div>
                     <blockquote class="text-lg italic mb-4">
                         "Whoever believes in Allah and the Last Day should speak good or remain silent."
                     </blockquote>
@@ -221,7 +227,7 @@
                 </div>
                 
                 <div class="hadith-card">
-                    <div class="text-6xl mb-4 text-center">??</div>
+                    <div class="text-6xl mb-4 text-center">🌟</div>
                     <blockquote class="text-lg italic mb-4">
                         "The believer is not one who eats his fill while his neighbor goes hungry."
                     </blockquote>
@@ -235,7 +241,7 @@
     </section>
 
     <!-- Tools Section -->
-    <section id="tools" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <section id="tools" class="py-20 bg-gray-50 dark:bg-gray-800 content-auto">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold font-amiri mb-4">Islamic Tools</h2>
@@ -243,9 +249,9 @@
             </div>
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Enhanced Tasbeeh Counter -->
+                <!-- Tasbeeh Counter -->
                 <div class="tool-card">
-                    <div class="text-4xl mb-4 text-center">??</div>
+                    <div class="text-4xl mb-4 text-center">📿</div>
                     <h3 class="text-xl font-bold mb-4">Tasbeeh Counter</h3>
                     <div class="text-center mb-4">
                         <div id="tasbeeh-count" class="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-2">0</div>
@@ -261,9 +267,9 @@
                     </div>
                 </div>
                 
-                <!-- Enhanced Prayer Times -->
+                <!-- Prayer Times -->
                 <div class="tool-card">
-                    <div class="text-4xl mb-4 text-center">??</div>
+                    <div class="text-4xl mb-4 text-center">🕌</div>
                     <h3 class="text-xl font-bold mb-4">Prayer Times</h3>
                     <div class="space-y-2 text-sm">
                         <div class="flex justify-between">
@@ -292,9 +298,9 @@
                     </p>
                 </div>
                 
-                <!-- Enhanced Daily Dua -->
+                <!-- Daily Dua -->
                 <div class="tool-card">
-                    <div class="text-4xl mb-4 text-center">??</div>
+                    <div class="text-4xl mb-4 text-center">🤲</div>
                     <h3 class="text-xl font-bold mb-4">Daily Dua</h3>
                     <div id="daily-dua" class="mb-4">
                         <p class="text-sm italic mb-2">
@@ -314,7 +320,7 @@
     </section>
 
     <!-- Resources Section -->
-    <section id="resources" class="py-20">
+    <section id="resources" class="py-20 content-auto">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-4xl md:text-5xl font-bold font-amiri mb-4">Free Resources</h2>
@@ -323,7 +329,7 @@
             
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="resource-card">
-                    <div class="text-4xl mb-4 text-center">???</div>
+                    <div class="text-4xl mb-4 text-center">🖼️</div>
                     <h3 class="text-xl font-bold mb-4">Islamic Wallpapers</h3>
                     <p class="text-gray-600 dark:text-gray-300 mb-4">
                         Beautiful high-resolution wallpapers with Quranic verses and Islamic calligraphy.
@@ -335,7 +341,7 @@
                 </div>
                 
                 <div class="resource-card">
-                    <div class="text-4xl mb-4 text-center">??</div>
+                    <div class="text-4xl mb-4 text-center">📚</div>
                     <h3 class="text-xl font-bold mb-4">Islamic Guides</h3>
                     <p class="text-gray-600 dark:text-gray-300 mb-4">
                         Comprehensive PDF guides on prayer, fasting, and Islamic fundamentals.
@@ -347,7 +353,7 @@
                 </div>
                 
                 <div class="resource-card">
-                    <div class="text-4xl mb-4 text-center">??</div>
+                    <div class="text-4xl mb-4 text-center">🎵</div>
                     <h3 class="text-xl font-bold mb-4">Nasheed Collection</h3>
                     <p class="text-gray-600 dark:text-gray-300 mb-4">
                         Beautiful Islamic songs and recitations for spiritual upliftment.
@@ -362,7 +368,7 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800 content-auto">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-4xl md:text-5xl font-bold font-amiri mb-8">About Light of Guidance</h2>
             
@@ -409,7 +415,7 @@
             <div class="grid md:grid-cols-3 gap-8 mb-8">
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
-                        <div class="text-2xl">??</div>
+                        <div class="text-2xl">🌙</div>
                         <h3 class="text-xl font-bold font-amiri">Light of Guidance</h3>
                     </div>
                     <p class="text-gray-400">
@@ -448,13 +454,13 @@
             
             <div class="border-t border-gray-700 pt-8 text-center">
                 <p class="text-gray-400 mb-2">
-                    � 2025 Light of Guidance. All rights reserved.
+                    &copy; 2025 Light of Guidance. All rights reserved.
                 </p>
                 <p class="text-sm text-gray-500 mb-2">
-                    Created with ?? by <span class="text-emerald-400 font-semibold" data-creator="Yousuf">Yousuf</span> for the sake of Allah
+                    Created with ❤️ by <span class="text-emerald-400 font-semibold" data-creator="Yousuf">Yousuf</span> for the sake of Allah
                 </p>
                 <p class="text-sm text-gray-500">
-                    Every share is a form of Dawah ??
+                    Every share is a form of Dawah 🌙
                 </p>
             </div>
         </div>
