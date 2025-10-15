@@ -1,5 +1,9 @@
 /* Custom CSS for Light of Guidance - Created by Yousuf */
 
+/* Loader failsafe: hide after 8s in case JS fails */
+@keyframes hideLoader { to { opacity: 0; visibility: hidden; } }
+#app-loader { animation: hideLoader 0s linear 8s forwards; }
+
 /* Font Configuration */
 .font-amiri {
     font-family: "Amiri", serif;
