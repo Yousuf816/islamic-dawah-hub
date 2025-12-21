@@ -1,0 +1,29 @@
+{
+  "name": "light-of-guidance",
+  "version": "1.0.0",
+  "description": "Light of Guidance - Islamic Dawah Hub",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx serve .",
+    "test": "echo 'No tests specified' && exit 0"
+  },
+  "keywords": [
+    "islam",
+    "quran",
+    "hadith",
+    "dawah",
+    "islamic",
+    "pwa"
+  ],
+  "author": "Yousuf",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/light-of-guidance.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
+

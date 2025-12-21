@@ -47,6 +47,9 @@ function initializeWebsite() {
     setupAudioRecitations();
     setupShareFunctionality();
     setupAdvancedAnimations();
+    setupBackToTop();
+    setupOfflineDetection();
+    setupSearchFunctionality();
 }
 
 // Update all creator credits throughout the website
@@ -69,6 +72,8 @@ function updateCreatorCredits() {
 // Enhanced Theme Toggle with System Preference Detection
 function setupThemeToggle() {
     const themeToggle = document.getElementById("theme-toggle");
+    if (!themeToggle) return;
+    
     const html = document.documentElement;
     
     // Check for saved theme preference or default to light mode
@@ -83,7 +88,7 @@ function setupThemeToggle() {
         const newTheme = html.classList.contains("dark") ? "dark" : "light";
         localStorage.setItem("theme", newTheme);
         updateThemeColorMeta();
-        showNotification(`Switched to ${newTheme} mode`);
+        showNotification(`Switched to ${newTheme} mode`, "info");
     });
 
     // Sync with system preference when no manual choice stored
@@ -100,22 +105,30 @@ function setupMobileMenu() {
     const mobileMenuToggle = document.getElementById("mobile-menu-toggle");
     const mobileMenu = document.getElementById("mobile-menu");
     
+    if (!mobileMenuToggle || !mobileMenu) return;
+    
     mobileMenuToggle.addEventListener("click", function() {
-        mobileMenu.classList.toggle("hidden");
+        const isHidden = mobileMenu.classList.toggle("hidden");
+        mobileMenuToggle.setAttribute("aria-expanded", !isHidden);
         
         // Animate hamburger icon
         const icon = this.querySelector("i");
-        icon.classList.toggle("fa-bars");
-        icon.classList.toggle("fa-times");
+        if (icon) {
+            icon.classList.toggle("fa-bars");
+            icon.classList.toggle("fa-times");
+        }
     });
     
     // Close mobile menu when clicking outside
     document.addEventListener("click", function(e) {
-        if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+        if (!mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target) && !mobileMenu.classList.contains("hidden")) {
             mobileMenu.classList.add("hidden");
+            mobileMenuToggle.setAttribute("aria-expanded", "false");
             const icon = mobileMenuToggle.querySelector("i");
-            icon.classList.add("fa-bars");
-            icon.classList.remove("fa-times");
+            if (icon) {
+                icon.classList.add("fa-bars");
+                icon.classList.remove("fa-times");
+            }
         }
     });
     
@@ -124,9 +137,12 @@ function setupMobileMenu() {
     mobileLinks.forEach(link => {
         link.addEventListener("click", function() {
             mobileMenu.classList.add("hidden");
+            mobileMenuToggle.setAttribute("aria-expanded", "false");
             const icon = mobileMenuToggle.querySelector("i");
-            icon.classList.add("fa-bars");
-            icon.classList.remove("fa-times");
+            if (icon) {
+                icon.classList.add("fa-bars");
+                icon.classList.remove("fa-times");
+            }
         });
     });
 }
@@ -136,6 +152,8 @@ function setupTasbeehCounter() {
     const countDisplay = document.getElementById("tasbeeh-count");
     const incrementBtn = document.getElementById("tasbeeh-increment");
     const resetBtn = document.getElementById("tasbeeh-reset");
+    
+    if (!countDisplay || !incrementBtn || !resetBtn) return;
     
     let count = parseInt(localStorage.getItem("tasbeehCount")) || 0;
     let currentDhikr = localStorage.getItem("currentDhikr") || "Subhan Allah";
@@ -151,6 +169,8 @@ function setupTasbeehCounter() {
     
     // Create enhanced counter display
     const counterContainer = countDisplay.parentElement;
+    if (!counterContainer) return;
+    
     counterContainer.innerHTML = `
         <div class="tasbeeh-counter" id="tasbeeh-display">${count}</div>
         <div class="flex justify-center mb-2">
@@ -166,6 +186,8 @@ function setupTasbeehCounter() {
     const enhancedDisplay = document.getElementById("tasbeeh-display");
     const dhikrSelector = document.getElementById("dhikr-selector");
     const dhikrText = counterContainer.querySelector("p");
+    
+    if (!enhancedDisplay || !dhikrSelector || !dhikrText) return;
     
     // Update dhikr text when selector changes
     dhikrSelector.addEventListener("change", function() {
@@ -183,10 +205,10 @@ function setupTasbeehCounter() {
         let colorClass = "scale-110";
         if (count % 100 === 0) {
             colorClass = "scale-125 bg-gradient-to-r from-yellow-400 to-orange-500";
-            showNotification(`?? ${count} dhikr completed! MashaAllah!`, "celebration");
+            showNotification(`🎉 ${count} dhikr completed! MashaAllah!`, "celebration");
         } else if (count % 33 === 0) {
             colorClass = "scale-120 bg-gradient-to-r from-green-400 to-emerald-500";
-            showNotification(`? ${count} dhikr! Barakallahu feeki!`, "success");
+            showNotification(`✅ ${count} dhikr! Barakallahu feeki!`, "success");
         }
         
         enhancedDisplay.className = `tasbeeh-counter ${colorClass}`;
@@ -210,6 +232,8 @@ function setupTasbeehCounter() {
 function setupDailyDua() {
     const newDuaBtn = document.getElementById("new-dua");
     const duaContainer = document.getElementById("daily-dua");
+    
+    if (!newDuaBtn || !duaContainer) return;
     
     const duas = {
         morning: [
@@ -339,46 +363,131 @@ function setupQuranVerseOfTheDay() {
 
 // Islamic Calendar Integration
 function setupIslamicCalendar() {
-    // This would integrate with an Islamic calendar API
-    // For now, we'll add a basic display
-    const today = new Date();
-    const islamicMonths = [
-        "Muharram", "Safar", "Rabi' al-awwal", "Rabi' al-thani",
-        "Jumada al-awwal", "Jumada al-thani", "Rajab", "Sha'ban",
-        "Ramadan", "Shawwal", "Dhu al-Qi'dah", "Dhu al-Hijjah"
-    ];
-    
-    // Add Islamic date display to navigation
+    // Enhanced Islamic calendar with proper conversion
     const nav = document.querySelector("nav .flex.items-center.space-x-2");
-    if (nav) {
+    if (!nav) return;
+    
+    // Get Islamic date using API
+    async function getIslamicDate() {
+        try {
+            const today = new Date();
+            const response = await fetch(`https://api.aladhan.com/v1/gToH/${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`);
+            const data = await response.json();
+            
+            if (data.code === 200 && data.data) {
+                const hijri = data.data.hijri;
+                const islamicDate = document.createElement("div");
+                islamicDate.className = "hidden md:block text-xs text-gray-500 dark:text-gray-400 ml-4";
+                islamicDate.innerHTML = `
+                    <div class="text-xs opacity-75">Islamic Date</div>
+                    <div class="font-semibold font-amiri">${hijri.day} ${hijri.month.en} ${hijri.year}</div>
+                `;
+                nav.appendChild(islamicDate);
+            } else {
+                displayFallbackDate();
+            }
+        } catch (error) {
+            console.log("Islamic date API error:", error);
+            displayFallbackDate();
+        }
+    }
+    
+    function displayFallbackDate() {
+        const today = new Date();
+        const islamicMonths = [
+            "Muharram", "Safar", "Rabi' al-awwal", "Rabi' al-thani",
+            "Jumada al-awwal", "Jumada al-thani", "Rajab", "Sha'ban",
+            "Ramadan", "Shawwal", "Dhu al-Qi'dah", "Dhu al-Hijjah"
+        ];
+        
         const islamicDate = document.createElement("div");
         islamicDate.className = "hidden md:block text-xs text-gray-500 dark:text-gray-400 ml-4";
         islamicDate.innerHTML = `
-            <div>Islamic Date</div>
-            <div class="font-semibold">${islamicMonths[today.getMonth()]} ${today.getDate()}</div>
+            <div class="text-xs opacity-75">Islamic Date</div>
+            <div class="font-semibold font-amiri">${islamicMonths[today.getMonth()]} ${today.getDate()}</div>
         `;
         nav.appendChild(islamicDate);
     }
+    
+    getIslamicDate();
 }
 
 // Audio Recitations
 function setupAudioRecitations() {
     // Add audio controls for Quran recitations
     const verseCards = document.querySelectorAll(".verse-card");
-    verseCards.forEach(card => {
+    verseCards.forEach((card, index) => {
         const audioBtn = document.createElement("button");
-        audioBtn.className = "absolute top-2 right-2 text-gray-400 hover:text-emerald-500 transition-colors";
-        audioBtn.innerHTML = '<i class="fas fa-play text-sm"></i>';
+        audioBtn.className = "absolute top-2 right-2 text-gray-400 hover:text-emerald-500 transition-colors p-2 rounded-full hover:bg-emerald-50 dark:hover:bg-emerald-900/20";
+        audioBtn.innerHTML = '<i class="fas fa-play text-sm" aria-hidden="true"></i>';
+        audioBtn.setAttribute("aria-label", "Play Quranic recitation");
         audioBtn.title = "Play recitation";
         
         card.style.position = "relative";
         card.appendChild(audioBtn);
         
+        let isPlaying = false;
+        let audio = null;
+        
         audioBtn.addEventListener("click", function() {
-            // This would play actual audio recitation
-            showNotification("Audio recitation would play here", "info");
+            if (isPlaying && audio) {
+                audio.pause();
+                audio = null;
+                isPlaying = false;
+                audioBtn.innerHTML = '<i class="fas fa-play text-sm" aria-hidden="true"></i>';
+                showNotification("Recitation paused", "info");
+            } else {
+                // Using Quran.com API for audio recitation
+                const verseReference = card.querySelector(".text-sm.text-gray-500")?.textContent || "";
+                const surahNumber = extractSurahNumber(verseReference);
+                
+                if (surahNumber) {
+                    playRecitation(surahNumber, audioBtn);
+                } else {
+                    showNotification("Audio recitation available for full surahs", "info");
+                }
+            }
         });
     });
+    
+    function extractSurahNumber(reference) {
+        // Extract surah number from reference like "Quran 2:152"
+        const match = reference.match(/Quran\s+(\d+)/);
+        return match ? match[1] : null;
+    }
+    
+    function playRecitation(surahNumber, button) {
+        // Using Quran.com audio API
+        const audioUrl = `https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/${surahNumber}.mp3`;
+        
+        try {
+            audio = new Audio(audioUrl);
+            button.innerHTML = '<i class="fas fa-pause text-sm" aria-hidden="true"></i>';
+            
+            audio.play().then(() => {
+                isPlaying = true;
+                showNotification("Playing recitation...", "success");
+            }).catch((error) => {
+                console.log("Audio play error:", error);
+                showNotification("Audio unavailable. Please try another recitation.", "error");
+                button.innerHTML = '<i class="fas fa-play text-sm" aria-hidden="true"></i>';
+            });
+            
+            audio.addEventListener("ended", () => {
+                isPlaying = false;
+                button.innerHTML = '<i class="fas fa-play text-sm" aria-hidden="true"></i>';
+            });
+            
+            audio.addEventListener("error", () => {
+                isPlaying = false;
+                button.innerHTML = '<i class="fas fa-play text-sm" aria-hidden="true"></i>';
+                showNotification("Audio unavailable", "error");
+            });
+        } catch (error) {
+            console.log("Audio creation error:", error);
+            showNotification("Audio playback not supported", "error");
+        }
+    }
 }
 
 // Enhanced Share Functionality
@@ -395,8 +504,11 @@ function setupShareFunctionality() {
         element.appendChild(shareBtn);
         
         shareBtn.addEventListener("click", function() {
-            const content = element.querySelector("p").textContent;
-            shareContent("text", content);
+            const contentElement = element.querySelector("p");
+            if (contentElement) {
+                const content = contentElement.textContent;
+                shareContent("text", content);
+            }
         });
     });
 }
@@ -421,32 +533,117 @@ function setupAdvancedAnimations() {
 
 // Enhanced Prayer Times with Location
 function setupPrayerTimes() {
-    // Enhanced prayer times with better styling
+    // Enhanced prayer times with better styling and API integration
     const prayerTimesContainer = document.querySelector(".tool-card:nth-child(2) .space-y-2");
-    if (prayerTimesContainer) {
+    if (!prayerTimesContainer) return;
+    
+    // Get user location for accurate prayer times
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            function(position) {
+                fetchPrayerTimes(position.coords.latitude, position.coords.longitude);
+            },
+            function(error) {
+                // Fallback to default times if location access denied
+                displayDefaultPrayerTimes();
+            }
+        );
+    } else {
+        displayDefaultPrayerTimes();
+    }
+    
+    function displayDefaultPrayerTimes() {
+        const now = new Date();
+        const times = calculatePrayerTimes(now);
+        
         prayerTimesContainer.innerHTML = `
             <div class="prayer-time">
                 <span>Fajr:</span>
-                <span class="font-semibold">5:30 AM</span>
+                <span class="font-semibold">${times.fajr}</span>
             </div>
             <div class="prayer-time">
                 <span>Dhuhr:</span>
-                <span class="font-semibold">12:15 PM</span>
+                <span class="font-semibold">${times.dhuhr}</span>
             </div>
             <div class="prayer-time">
                 <span>Asr:</span>
-                <span class="font-semibold">3:45 PM</span>
+                <span class="font-semibold">${times.asr}</span>
             </div>
             <div class="prayer-time">
                 <span>Maghrib:</span>
-                <span class="font-semibold">6:20 PM</span>
+                <span class="font-semibold">${times.maghrib}</span>
             </div>
             <div class="prayer-time">
                 <span>Isha:</span>
-                <span class="font-semibold">7:45 PM</span>
+                <span class="font-semibold">${times.isha}</span>
             </div>
         `;
     }
+    
+    function calculatePrayerTimes(date) {
+        // Simplified calculation - in production, use proper Islamic prayer time calculation
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        
+        return {
+            fajr: "5:30 AM",
+            dhuhr: "12:15 PM",
+            asr: "3:45 PM",
+            maghrib: "6:20 PM",
+            isha: "7:45 PM"
+        };
+    }
+    
+    async function fetchPrayerTimes(lat, lng) {
+        try {
+            // Using Aladhan API (free Islamic prayer times API)
+            const today = new Date();
+            const response = await fetch(`https://api.aladhan.com/v1/timings/${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}?latitude=${lat}&longitude=${lng}&method=2`);
+            const data = await response.json();
+            
+            if (data.code === 200 && data.data) {
+                const timings = data.data.timings;
+                prayerTimesContainer.innerHTML = `
+                    <div class="prayer-time">
+                        <span>Fajr:</span>
+                        <span class="font-semibold">${formatTime(timings.Fajr)}</span>
+                    </div>
+                    <div class="prayer-time">
+                        <span>Dhuhr:</span>
+                        <span class="font-semibold">${formatTime(timings.Dhuhr)}</span>
+                    </div>
+                    <div class="prayer-time">
+                        <span>Asr:</span>
+                        <span class="font-semibold">${formatTime(timings.Asr)}</span>
+                    </div>
+                    <div class="prayer-time">
+                        <span>Maghrib:</span>
+                        <span class="font-semibold">${formatTime(timings.Maghrib)}</span>
+                    </div>
+                    <div class="prayer-time">
+                        <span>Isha:</span>
+                        <span class="font-semibold">${formatTime(timings.Isha)}</span>
+                    </div>
+                `;
+            } else {
+                displayDefaultPrayerTimes();
+            }
+        } catch (error) {
+            console.log("Prayer times API error:", error);
+            displayDefaultPrayerTimes();
+        }
+    }
+    
+    function formatTime(time24) {
+        const [hours, minutes] = time24.split(":");
+        const hour = parseInt(hours);
+        const ampm = hour >= 12 ? "PM" : "AM";
+        const hour12 = hour % 12 || 12;
+        return `${hour12}:${minutes} ${ampm}`;
+    }
+    
+    // Display default times initially
+    displayDefaultPrayerTimes();
 }
 
 // Enhanced Creator Credit
@@ -668,8 +865,11 @@ document.addEventListener("keydown", function(e) {
         e.preventDefault();
         const activeVerse = document.querySelector(".verse-card:hover");
         if (activeVerse) {
-            const verse = activeVerse.querySelector("p").textContent;
-            copyToClipboard(verse);
+            const verseElement = activeVerse.querySelector("p");
+            if (verseElement) {
+                const verse = verseElement.textContent;
+                copyToClipboard(verse);
+            }
         }
     }
 });
@@ -699,15 +899,197 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Performance optimization
+// Back to Top Button
+function setupBackToTop() {
+    const backToTopBtn = document.getElementById("back-to-top");
+    if (!backToTopBtn) return;
+    
+    window.addEventListener("scroll", function() {
+        if (window.pageYOffset > 300) {
+            backToTopBtn.classList.remove("opacity-0", "pointer-events-none");
+            backToTopBtn.classList.add("opacity-100");
+        } else {
+            backToTopBtn.classList.add("opacity-0", "pointer-events-none");
+            backToTopBtn.classList.remove("opacity-100");
+        }
+    });
+    
+    backToTopBtn.addEventListener("click", function() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+}
+
+// Offline Detection
+function setupOfflineDetection() {
+    const offlineIndicator = document.getElementById("offline-indicator");
+    if (!offlineIndicator) return;
+    
+    function updateOnlineStatus() {
+        if (navigator.onLine) {
+            offlineIndicator.classList.add("hidden");
+        } else {
+            offlineIndicator.classList.remove("hidden");
+        }
+    }
+    
+    window.addEventListener("online", updateOnlineStatus);
+    window.addEventListener("offline", updateOnlineStatus);
+    updateOnlineStatus();
+}
+
+// Search Functionality
+function setupSearchFunctionality() {
+    // Add search input to navigation (optional enhancement)
+    const nav = document.querySelector("nav .max-w-7xl");
+    if (!nav) return;
+    
+    // Create search button
+    const searchBtn = document.createElement("button");
+    searchBtn.className = "hidden md:block p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors";
+    searchBtn.innerHTML = '<i class="fas fa-search" aria-hidden="true"></i>';
+    searchBtn.setAttribute("aria-label", "Search");
+    searchBtn.setAttribute("title", "Search (Ctrl+K)");
+    
+    const navContainer = nav.querySelector(".flex.justify-between");
+    if (navContainer) {
+        const themeToggleContainer = navContainer.querySelector(".flex.items-center.space-x-4");
+        if (themeToggleContainer) {
+            themeToggleContainer.insertBefore(searchBtn, themeToggleContainer.firstChild);
+        }
+    }
+    
+    // Search modal
+    const searchModal = document.createElement("div");
+    searchModal.id = "search-modal";
+    searchModal.className = "fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center";
+    searchModal.innerHTML = `
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-6 max-w-2xl w-full mx-4 relative">
+            <button id="close-search" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200" aria-label="Close search">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <input type="text" id="search-input" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent dark:bg-gray-700 dark:text-white" placeholder="Search verses, hadith, duas..." autocomplete="off">
+            <div id="search-results" class="mt-4 max-h-96 overflow-y-auto"></div>
+        </div>
+    `;
+    document.body.appendChild(searchModal);
+    
+    searchBtn.addEventListener("click", function() {
+        searchModal.classList.remove("hidden");
+        searchModal.classList.add("flex");
+        document.getElementById("search-input").focus();
+    });
+    
+    document.getElementById("close-search").addEventListener("click", function() {
+        searchModal.classList.add("hidden");
+        searchModal.classList.remove("flex");
+    });
+    
+    searchModal.addEventListener("click", function(e) {
+        if (e.target === searchModal) {
+            searchModal.classList.add("hidden");
+            searchModal.classList.remove("flex");
+        }
+    });
+    
+    // Search functionality
+    const searchInput = document.getElementById("search-input");
+    const searchResults = document.getElementById("search-results");
+    
+    searchInput.addEventListener("input", function(e) {
+        const query = e.target.value.toLowerCase().trim();
+        if (query.length < 2) {
+            searchResults.innerHTML = "";
+            return;
+        }
+        
+        const results = performSearch(query);
+        displaySearchResults(results);
+    });
+    
+    // Keyboard shortcut
+    document.addEventListener("keydown", function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+            e.preventDefault();
+            searchBtn.click();
+        }
+        if (e.key === "Escape" && !searchModal.classList.contains("hidden")) {
+            document.getElementById("close-search").click();
+        }
+    });
+}
+
+function performSearch(query) {
+    const results = [];
+    
+    // Search verses
+    document.querySelectorAll(".verse-card").forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(query)) {
+            const verseText = card.querySelector("p")?.textContent || "";
+            results.push({
+                type: "Verse",
+                text: verseText.substring(0, 100) + "...",
+                element: card
+            });
+        }
+    });
+    
+    // Search hadith
+    document.querySelectorAll(".hadith-card").forEach(card => {
+        const text = card.textContent.toLowerCase();
+        if (text.includes(query)) {
+            const hadithText = card.querySelector("blockquote")?.textContent || "";
+            results.push({
+                type: "Hadith",
+                text: hadithText.substring(0, 100) + "...",
+                element: card
+            });
+        }
+    });
+    
+    return results;
+}
+
+function displaySearchResults(results) {
+    const searchResults = document.getElementById("search-results");
+    if (results.length === 0) {
+        searchResults.innerHTML = '<p class="text-gray-500 dark:text-gray-400 text-center py-4">No results found</p>';
+        return;
+    }
+    
+    searchResults.innerHTML = results.map((result, index) => `
+        <div class="p-3 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg cursor-pointer border-b border-gray-200 dark:border-gray-600" data-index="${index}">
+            <div class="text-xs text-emerald-600 dark:text-emerald-400 font-semibold mb-1">${result.type}</div>
+            <div class="text-sm text-gray-700 dark:text-gray-300">${result.text}</div>
+        </div>
+    `).join("");
+    
+    // Add click handlers
+    searchResults.querySelectorAll("[data-index]").forEach((item, index) => {
+        item.addEventListener("click", function() {
+            const result = results[index];
+            result.element.scrollIntoView({ behavior: "smooth", block: "center" });
+            result.element.style.animation = "pulse 1s";
+            setTimeout(() => {
+                result.element.style.animation = "";
+            }, 1000);
+            document.getElementById("close-search").click();
+        });
+    });
+}
+
+// Performance optimization - Service Worker
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function() {
         navigator.serviceWorker.register("/sw.js")
             .then(function(registration) {
-                console.log("ServiceWorker registration successful");
+                console.log("ServiceWorker registration successful", registration.scope);
             })
             .catch(function(err) {
-                console.log("ServiceWorker registration failed");
+                console.log("ServiceWorker registration failed:", err);
             });
     });
 }

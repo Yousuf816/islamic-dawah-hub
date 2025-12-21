@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Check - Light of Guidance</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .status {
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { border-left: 4px solid #10b981; }
+        .error { border-left: 4px solid #ef4444; }
+        .warning { border-left: 4px solid #f59e0b; }
+        h1 { color: #111827; }
+        h2 { color: #374151; margin-top: 0; }
+        code { background: #f3f4f6; padding: 2px 6px; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>🏥 Health Check - Light of Guidance</h1>
+    <p>This page verifies that all critical components are working correctly.</p>
+    
+    <div id="results"></div>
+    
+    <script>
+        const results = document.getElementById('results');
+        const checks = [];
+        
+        function addCheck(name, status, message) {
+            checks.push({ name, status, message });
+        }
+        
+        // Check 1: Service Worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistration().then(reg => {
+                if (reg) {
+                    addCheck('Service Worker', 'success', 'Service worker is registered and active');
+                } else {
+                    addCheck('Service Worker', 'warning', 'Service worker not yet registered');
+                }
+                renderResults();
+            }).catch(() => {
+                addCheck('Service Worker', 'error', 'Service worker registration failed');
+                renderResults();
+            });
+        } else {
+            addCheck('Service Worker', 'warning', 'Service worker not supported in this browser');
+            renderResults();
+        }
+        
+        // Check 2: HTTPS
+        if (location.protocol === 'https:') {
+            addCheck('HTTPS', 'success', 'Site is served over HTTPS');
+        } else if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+            addCheck('HTTPS', 'warning', 'Local development (HTTPS not required)');
+        } else {
+            addCheck('HTTPS', 'error', 'Site should be served over HTTPS for production');
+        }
+        
+        // Check 3: Critical Files
+        const criticalFiles = ['index.html', 'styles.css', 'script.js', 'sw.js', 'manifest.json'];
+        let filesChecked = 0;
+        criticalFiles.forEach(file => {
+            fetch(file, { method: 'HEAD' })
+                .then(res => {
+                    if (res.ok) {
+                        addCheck(`File: ${file}`, 'success', 'File is accessible');
+                    } else {
+                        addCheck(`File: ${file}`, 'error', `File returned status ${res.status}`);
+                    }
+                    filesChecked++;
+                    if (filesChecked === criticalFiles.length) renderResults();
+                })
+                .catch(() => {
+                    addCheck(`File: ${file}`, 'error', 'File not found or inaccessible');
+                    filesChecked++;
+                    if (filesChecked === criticalFiles.length) renderResults();
+                });
+        });
+        
+        // Check 4: LocalStorage
+        try {
+            localStorage.setItem('test', 'test');
+            localStorage.removeItem('test');
+            addCheck('LocalStorage', 'success', 'LocalStorage is available');
+        } catch (e) {
+            addCheck('LocalStorage', 'error', 'LocalStorage is not available');
+        }
+        
+        // Check 5: Geolocation (for prayer times)
+        if (navigator.geolocation) {
+            addCheck('Geolocation', 'success', 'Geolocation API is available');
+        } else {
+            addCheck('Geolocation', 'warning', 'Geolocation API not available');
+        }
+        
+        // Check 6: Fetch API
+        if (window.fetch) {
+            addCheck('Fetch API', 'success', 'Fetch API is available');
+        } else {
+            addCheck('Fetch API', 'error', 'Fetch API not available');
+        }
+        
+        // Check 7: Console Errors
+        const originalError = console.error;
+        let hasErrors = false;
+        console.error = function(...args) {
+            hasErrors = true;
+            originalError.apply(console, args);
+        };
+        
+        setTimeout(() => {
+            if (!hasErrors) {
+                addCheck('Console Errors', 'success', 'No console errors detected');
+            } else {
+                addCheck('Console Errors', 'warning', 'Some console errors detected (check browser console)');
+            }
+            renderResults();
+        }, 2000);
+        
+        function renderResults() {
+            if (checks.length < 7) return; // Wait for all checks
+            
+            results.innerHTML = checks.map(check => `
+                <div class="status ${check.status}">
+                    <h2>${check.status === 'success' ? '✅' : check.status === 'error' ? '❌' : '⚠️'} ${check.name}</h2>
+                    <p>${check.message}</p>
+                </div>
+            `).join('');
+            
+            const successCount = checks.filter(c => c.status === 'success').length;
+            const totalCount = checks.length;
+            
+            results.innerHTML += `
+                <div class="status ${successCount === totalCount ? 'success' : successCount > totalCount / 2 ? 'warning' : 'error'}">
+                    <h2>📊 Summary</h2>
+                    <p><strong>${successCount} of ${totalCount}</strong> checks passed</p>
+                    <p>Status: ${successCount === totalCount ? '✅ All systems operational' : successCount > totalCount / 2 ? '⚠️ Some issues detected' : '❌ Multiple issues detected'}</p>
+                </div>
+            `;
+        }
+        
+        // Initial render
+        renderResults();
+    </script>
+</body>
+</html>
+
