@@ -40,7 +40,6 @@ function initializeWebsite() {
     setupSmoothScrolling();
     setupAnimations();
     setupPrayerTimes();
-    setupCreatorCredit();
     setupEnhancedFeatures();
     setupQuranVerseOfTheDay();
     setupIslamicCalendar();
@@ -65,8 +64,8 @@ function updateCreatorCredits() {
         metaAuthor.setAttribute("content", CONFIG.creatorName);
     }
     
-    // Update title if needed
-    document.title = `${CONFIG.websiteName} - Created by ${CONFIG.creatorName}`;
+    // Keep title focused on the message, not the creator
+    document.title = `${CONFIG.websiteName} - Islamic Dawah Platform`;
 }
 
 // Enhanced Theme Toggle with System Preference Detection
@@ -515,16 +514,7 @@ function setupShareFunctionality() {
 
 // Advanced Animations
 function setupAdvancedAnimations() {
-    // Parallax effect for hero section
-    window.addEventListener("scroll", function() {
-        const scrolled = window.pageYOffset;
-        const hero = document.querySelector("#home");
-        if (hero) {
-            hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-        }
-    });
-    
-    // Staggered animation for cards
+    // Subtle staggered animation for cards (kept minimal to avoid distraction)
     const cards = document.querySelectorAll(".verse-card, .hadith-card, .tool-card, .resource-card");
     cards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
@@ -644,20 +634,6 @@ function setupPrayerTimes() {
     
     // Display default times initially
     displayDefaultPrayerTimes();
-}
-
-// Enhanced Creator Credit
-function setupCreatorCredit() {
-    const credit = document.createElement("div");
-    credit.className = "creator-credit";
-    credit.innerHTML = `Created by ${CONFIG.creatorName}`;
-    credit.title = `${CONFIG.websiteName} - Islamic Dawah Platform`;
-    document.body.appendChild(credit);
-    
-    credit.addEventListener("click", function() {
-        showNotification("May Allah accept our efforts! Ameen ??", "celebration");
-        createRippleEffect(this);
-    });
 }
 
 // Enhanced Features

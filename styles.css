@@ -519,34 +519,6 @@ a:focus {
     }
 }
 
-/* Enhanced Creator Credit */
-.creator-credit {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: rgba(16, 185, 129, 0.9);
-    color: white;
-    padding: 8px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 500;
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-}
-
-.creator-credit:hover {
-    background: rgba(16, 185, 129, 1);
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
-}
-
-.dark .creator-credit {
-    background: rgba(16, 185, 129, 0.8);
-}
-
 /* Enhanced Prayer Times */
 .prayer-time {
     display: flex;
