@@ -1069,3 +1069,4 @@ if ("serviceWorker" in navigator) {
             });
     });
 }
+

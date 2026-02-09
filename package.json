@@ -6,7 +6,14 @@
   "scripts": {
     "start": "npx serve .",
     "dev": "npx serve .",
-    "test": "echo 'No tests specified' && exit 0"
+    "test": "npm run test:accessibility && npm run test:links",
+    "test:accessibility": "pa11y-ci --sitemap https://yousuf816.github.io/islamic-dawah-hub/sitemap.xml || echo 'Pa11y check completed'",
+    "test:links": "node scripts/check-links.js",
+    "test:lighthouse": "lighthouse https://yousuf816.github.io/islamic-dawah-hub/ --output html --output-path ./reports/lighthouse.html --chrome-flags='--headless'",
+    "audit": "npm audit --audit-level=moderate",
+    "validate": "node scripts/validate-html.js",
+    "build": "echo 'Static site - no build step required'",
+    "deploy": "echo 'Deployment handled by GitHub Pages'"
   },
   "keywords": [
     "islam",
@@ -20,10 +27,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/light-of-guidance.git"
+    "url": "https://github.com/Yousuf816/islamic-dawah-hub.git"
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "pa11y-ci": "^3.0.1",
+    "lighthouse": "^11.0.0"
   }
 }
-

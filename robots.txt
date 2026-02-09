@@ -4,5 +4,5 @@ Allow: /
 Disallow: /sw.js
 
 # Sitemap (update with your actual domain)
-Sitemap: https://lightofguidance.com/sitemap.xml
+Sitemap: https://yousuf816.github.io/islamic-dawah-hub/sitemap.xml
 
