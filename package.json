@@ -10,6 +10,7 @@
     "test:accessibility": "pa11y-ci --sitemap https://yousuf816.github.io/islamic-dawah-hub/sitemap.xml || echo 'Pa11y check completed'",
     "test:links": "node scripts/check-links.js",
     "test:lighthouse": "lighthouse https://yousuf816.github.io/islamic-dawah-hub/ --output html --output-path ./reports/lighthouse.html --chrome-flags='--headless'",
+    "test:performance": "node scripts/performance-check.js",
     "audit": "npm audit --audit-level=moderate",
     "validate": "node scripts/validate-html.js",
     "build": "echo 'Static site - no build step required'",

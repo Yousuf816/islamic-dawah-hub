@@ -93,3 +93,6 @@ jobs:
           echo "Then run: pa11y-ci --sitemap https://yousuf816.github.io/islamic-dawah-hub/sitemap.xml"
         continue-on-error: true
 
+
+
+

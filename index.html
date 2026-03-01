@@ -24,7 +24,7 @@
     <meta property="og:description" content="Your central hub for Islamic knowledge, guidance, and Dawah resources">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://yousuf816.github.io/islamic-dawah-hub/">
-    <meta property="og:image" content="https://yousuf816.github.io/islamic-dawah-hub/og-image.jpg">
+    <meta property="og:image" content="https://yousuf816.github.io/islamic-dawah-hub/og-image.svg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Light of Guidance - Islamic Dawah Hub">
@@ -33,7 +33,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Light of Guidance - Islamic Dawah Hub">
     <meta name="twitter:description" content="Your central hub for Islamic knowledge, guidance, and Dawah resources">
-    <meta name="twitter:image" content="https://yousuf816.github.io/islamic-dawah-hub/og-image.jpg">
+    <meta name="twitter:image" content="https://yousuf816.github.io/islamic-dawah-hub/og-image.svg">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://yousuf816.github.io/islamic-dawah-hub/">
@@ -220,6 +220,22 @@
                         <p class="text-lg mb-2">"So remember Me; I will remember you."</p>
                         <p class="text-sm text-gray-500 dark:text-gray-400">- Quran 2:152</p>
                     </div>
+                    
+                    <div class="verse-card">
+                        <div class="text-2xl font-amiri text-right mb-4 text-emerald-700 dark:text-emerald-400">
+                            رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ
+                        </div>
+                        <p class="text-lg mb-2">"Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire."</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">- Quran 2:201</p>
+                    </div>
+                    
+                    <div class="verse-card">
+                        <div class="text-2xl font-amiri text-right mb-4 text-emerald-700 dark:text-emerald-400">
+                            وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ
+                        </div>
+                        <p class="text-lg mb-2">"And my success is not but through Allah."</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">- Quran 11:88</p>
+                    </div>
                 </div>
                 
                 <!-- Tafsir Section -->
@@ -280,6 +296,50 @@
                     <p class="text-sm text-gray-500 dark:text-gray-400">
                         - Prophet Muhammad (PBUH)<br>
                         <span class="font-semibold">Source:</span> Al-Bayhaqi
+                    </p>
+                </div>
+                
+                <div class="hadith-card">
+                    <div class="text-6xl mb-4 text-center" role="img" aria-label="Heart">💚</div>
+                    <blockquote class="text-lg italic mb-4">
+                        "None of you truly believes until he loves for his brother what he loves for himself."
+                    </blockquote>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        - Prophet Muhammad (PBUH)<br>
+                        <span class="font-semibold">Source:</span> Sahih Bukhari
+                    </p>
+                </div>
+                
+                <div class="hadith-card">
+                    <div class="text-6xl mb-4 text-center" role="img" aria-label="Prayer">🤲</div>
+                    <blockquote class="text-lg italic mb-4">
+                        "The most beloved deed to Allah is the most regular and constant, even if it were little."
+                    </blockquote>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        - Prophet Muhammad (PBUH)<br>
+                        <span class="font-semibold">Source:</span> Sahih Bukhari
+                    </p>
+                </div>
+                
+                <div class="hadith-card">
+                    <div class="text-6xl mb-4 text-center" role="img" aria-label="Knowledge">📖</div>
+                    <blockquote class="text-lg italic mb-4">
+                        "Seeking knowledge is an obligation upon every Muslim."
+                    </blockquote>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        - Prophet Muhammad (PBUH)<br>
+                        <span class="font-semibold">Source:</span> Ibn Majah
+                    </p>
+                </div>
+                
+                <div class="hadith-card">
+                    <div class="text-6xl mb-4 text-center" role="img" aria-label="Mercy">💙</div>
+                    <blockquote class="text-lg italic mb-4">
+                        "Show mercy to those on earth, and the One in the heavens will show mercy to you."
+                    </blockquote>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
+                        - Prophet Muhammad (PBUH)<br>
+                        <span class="font-semibold">Source:</span> At-Tirmidhi
                     </p>
                 </div>
             </div>
@@ -356,10 +416,15 @@
                             - Quran 2:201
                         </p>
                     </div>
-                    <button id="new-dua" class="w-full btn-primary py-2">
-                        <i class="fas fa-refresh mr-2"></i>
-                        New Dua
-                    </button>
+                    <div class="flex gap-2">
+                        <button id="new-dua" class="flex-1 btn-primary py-2">
+                            <i class="fas fa-refresh mr-2"></i>
+                            New Dua
+                        </button>
+                        <button id="copy-dua" class="px-3 py-2 btn-secondary" aria-label="Copy dua to clipboard" title="Copy dua">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -544,8 +609,14 @@
     }
     </script>
     
+    <!-- Error Tracking (load first) -->
+    <script src="error-tracking.js?v=1" defer></script>
+    
+    <!-- Privacy-Friendly Analytics (optional) -->
+    <script src="analytics.js?v=1" defer></script>
+    
     <!-- JavaScript (cache-busted) -->
-    <script src="script.js?v=3" defer></script>
+    <script src="script.js?v=4" defer></script>
     <noscript>
         <style>#app-loader{display:none !important}</style>
     </noscript>

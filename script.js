@@ -243,6 +243,18 @@ function setupDailyDua() {
             {
                 text: "O Allah, make the beginning of this day good, the middle prosperous, and the end successful.",
                 source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, by Your morning we reach evening, and by Your evening we reach morning. Grant us life if You know that life is good for us, and grant us death if You know that death is good for us.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, I have reached the morning and call You to witness, and the bearers of Your Throne, and Your angels, and all Your creation, that You are Allah, there is no god but You alone, You have no partner, and that Muhammad is Your servant and Messenger.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, whatever blessing I or any of Your creation have risen to this morning, it is from You alone, You have no partner. So all praise and thanks are due to You.",
+                source: "Prophet Muhammad (PBUH)"
             }
         ],
         general: [
@@ -261,6 +273,30 @@ function setupDailyDua() {
             {
                 text: "O Allah, forgive me, have mercy on me, guide me, and provide for me.",
                 source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, I ask You for beneficial knowledge, good provision, and acceptable deeds.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, help me to remember You, to thank You, and to worship You in the best way.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, I ask You for Your love, the love of those who love You, and the love of deeds that will bring me closer to Your love.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, make the Quran the spring of my heart, the light of my chest, the remover of my sadness, and the reliever of my anxiety.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, I seek refuge in You from knowledge that does not benefit, from a heart that does not fear You, from a soul that is not satisfied, and from a supplication that is not answered.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, I ask You for steadfastness in faith and determination in guidance.",
+                source: "Prophet Muhammad (PBUH)"
             }
         ],
         evening: [
@@ -270,6 +306,36 @@ function setupDailyDua() {
             },
             {
                 text: "O Allah, I seek refuge in You from the punishment of the grave, and from the punishment of Hell-fire, and from the trials of life and death, and from the evil of the trial of the False Messiah.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, by Your evening we reach the morning, and by Your morning we reach the evening. Grant us life if You know that life is good for us, and grant us death if You know that death is good for us.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, I have reached the evening and call You to witness, and the bearers of Your Throne, and Your angels, and all Your creation, that You are Allah, there is no god but You alone, You have no partner, and that Muhammad is Your servant and Messenger.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, whatever blessing I or any of Your creation have reached this evening, it is from You alone, You have no partner. So all praise and thanks are due to You.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, I ask You for the good of this night and the good of what follows it, and I seek refuge in You from the evil of this night and the evil of what follows it.",
+                source: "Prophet Muhammad (PBUH)"
+            }
+        ],
+        beforeSleep: [
+            {
+                text: "O Allah, in Your name I die and live.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, protect me from Your punishment on the day You resurrect Your servants.",
+                source: "Prophet Muhammad (PBUH)"
+            },
+            {
+                text: "O Allah, I have submitted myself to You, and turned my face to You, and entrusted my affairs to You, and taken refuge in You, out of desire for You and fear of You. There is no refuge or escape from You except to You. I believe in Your Book which You have revealed and Your Prophet whom You have sent.",
                 source: "Prophet Muhammad (PBUH)"
             }
         ]
@@ -323,19 +389,79 @@ function setupDailyDua() {
 function setupQuranVerseOfTheDay() {
     const verses = [
         {
-            arabic: "????? ?????? ??????? ?????? ???????????",
+            arabic: "وَمَن يَهْدِ اللَّهُ فَهُوَ الْمُهْتَدِ",
             english: "And whoever Allah guides - he is the [rightly] guided one.",
             reference: "Quran 7:178"
         },
         {
-            arabic: "????????????? ????????????",
+            arabic: "فَاذْكُرُونِي أَذْكُرْكُمْ",
             english: "So remember Me; I will remember you.",
             reference: "Quran 2:152"
         },
         {
-            arabic: "????? ??????? ??????? ??????? ????? ?????????",
+            arabic: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا",
             english: "And whoever fears Allah - He will make for him a way out.",
             reference: "Quran 65:2"
+        },
+        {
+            arabic: "وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ",
+            english: "And my success is not but through Allah.",
+            reference: "Quran 11:88"
+        },
+        {
+            arabic: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+            english: "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire.",
+            reference: "Quran 2:201"
+        },
+        {
+            arabic: "وَمَا أُوتِيتُم مِّنَ الْعِلْمِ إِلَّا قَلِيلًا",
+            english: "And you have not been given of knowledge except a little.",
+            reference: "Quran 17:85"
+        },
+        {
+            arabic: "وَمَا أَدْرَاكَ مَا لَيْلَةُ الْقَدْرِ",
+            english: "And what can make you know what is the Night of Decree?",
+            reference: "Quran 97:2"
+        },
+        {
+            arabic: "وَمَا خَلَقْتُ الْجِنَّ وَالْإِنسَ إِلَّا لِيَعْبُدُونِ",
+            english: "And I did not create the jinn and mankind except to worship Me.",
+            reference: "Quran 51:56"
+        },
+        {
+            arabic: "وَاللَّهُ خَيْرٌ حَافِظًا وَهُوَ أَرْحَمُ الرَّاحِمِينَ",
+            english: "But Allah is the best guardian, and He is the most merciful of the merciful.",
+            reference: "Quran 12:64"
+        },
+        {
+            arabic: "وَمَا تَوْفِيقِي إِلَّا بِاللَّهِ عَلَيْهِ تَوَكَّلْتُ وَإِلَيْهِ أُنِيبُ",
+            english: "And my success is not but through Allah. Upon him I have relied, and to Him I return.",
+            reference: "Quran 11:88"
+        },
+        {
+            arabic: "وَلَا تَحْزَنْ إِنَّ اللَّهَ مَعَنَا",
+            english: "And do not grieve; indeed Allah is with us.",
+            reference: "Quran 9:40"
+        },
+        {
+            arabic: "وَمَا رَمَيْتَ إِذْ رَمَيْتَ وَلَٰكِنَّ اللَّهَ رَمَىٰ",
+            english: "And you did not throw when you threw, but it was Allah who threw.",
+            reference: "Quran 8:17"
+        },
+        {
+            arabic: "وَمَا أَنَا إِلَّا نَذِيرٌ مُّبِينٌ",
+            english: "And I am not except a clear warner.",
+            reference: "Quran 26:115"
+        },
+        {
+            arabic: "وَمَا أَدْرَاكَ مَا الْحُطَمَةُ",
+            english: "And what can make you know what is the Crusher?",
+            reference: "Quran 104:5"
+        },
+        {
+            arabic: "وَمَا أَدْرَاكَ مَا يَوْمُ الدِّينِ",
+            english: "And what can make you know what is the Day of Recompense?",
+            reference: "Quran 82:17"
         }
     ];
     
